@@ -1,0 +1,7 @@
+fastapi
+uvicorn[standard]
+pywebio==1.*
+gradio
+transformers
+peft
+datasets
