@@ -1,4 +1,3 @@
-# main_flask.py
 from flask import Flask
 from pywebio.platform.flask import webio_view
 

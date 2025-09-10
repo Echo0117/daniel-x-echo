@@ -10,9 +10,9 @@ COPY requirements.txt .
 RUN pip install --no-cache-dir -r requirements.txt
 
 # copy only what you need
-COPY main_flask.py .
+COPY main.py .
 COPY app ./app
 COPY static ./static
 
 EXPOSE 8000
-CMD ["gunicorn","-w","1","-k","gthread","--threads","8","-b","0.0.0.0:8000","main_flask:app"]
+CMD ["gunicorn","-w","1","-k","gthread","--threads","8","-b","0.0.0.0:8000","main:app"]
