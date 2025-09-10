@@ -3,7 +3,7 @@ from flask import Flask
 from pywebio.platform.flask import webio_view
 
 # import your page functions (each is a callable: app_main())
-from app.pages import two_weeks_v1, two_weeks_menu, open_box, three_weeks, perseids_app
+from app.pages import eighteen_days, two_weeks_v1, two_weeks_menu, three_weeks, perseids_app
 
 flask_app = Flask(__name__)
 
@@ -19,8 +19,8 @@ flask_app.add_url_rule(
     methods=['GET', 'POST', 'OPTIONS']
 )
 flask_app.add_url_rule(
-    "/open-box", "open_box",
-    webio_view(open_box.app_main),
+    "/eighteen-days", "eighteen-days",
+    webio_view(eighteen_days.app_main),
     methods=['GET', 'POST', 'OPTIONS']
 )
 flask_app.add_url_rule(

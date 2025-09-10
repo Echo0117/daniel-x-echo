@@ -1,4 +1,4 @@
-# app/pages/open_box.py
+# app/pages/eighteen_days.py
 from pywebio.input import actions
 from pywebio.output import put_html, put_text, put_image, clear
 from app.ui import back_home

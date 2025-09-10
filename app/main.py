@@ -2,7 +2,7 @@ from flask import Flask
 from pywebio.platform.flask import webio_view
 
 # import your PyWebIO pages (each exposes app_main())
-from app.pages import two_weeks_v1, two_weeks_menu, open_box, three_weeks, perseids_app
+from app.pages import eighteen_days, love_letters, two_weeks_v1, two_weeks_menu, three_weeks, perseids_app
 
 app = Flask(__name__, static_folder="static")
 
@@ -105,11 +105,6 @@ body{
 
     <main class="grid">
       <div class="card">
-        <h3>🌠 Perseids Surprise</h3>
-        <p>Dinner → ferris wheel → a meteor shower night. Bring a wish.</p>
-        <a class="btn" href="/perseids"><span class="emoji">Open</span> /perseids</a>
-      </div>
-      <div class="card">
         <h3>💖 Two Weeks (v1)</h3>
         <p>Say your name, share your mood, get a tiny surprise.</p>
         <a class="btn" href="/two-weeks"><span class="emoji">Open</span> /two-weeks</a>
@@ -120,36 +115,57 @@ body{
         <a class="btn" href="/two-weeks2"><span class="emoji">Open</span> /two-weeks2</a>
       </div>
       <div class="card">
-        <h3>🎁 Open-Box Gifts</h3>
+        <h3>🎁 Eighteen Days</h3>
         <p>Pick a box to reveal a photo, a message, or a secret.</p>
-        <a class="btn" href="/open-box"><span class="emoji">Open</span> /open-box</a>
+        <a class="btn" href="/eighteen-days"><span class="emoji">Open</span> /eighteen-days</a>
       </div>
       <div class="card">
         <h3>🎉 Three Weeks Surprise</h3>
         <p>One big reveal, wrapped in pink and lavender.</p>
         <a class="btn" href="/three-weeks"><span class="emoji">Open</span> /three-weeks</a>
       </div>
+      <div class="card">
+        <h3>🌠 Perseids Surprise</h3>
+        <p>Dinner → ferris wheel → a meteor shower night. Bring a wish.</p>
+        <a class="btn" href="/perseids"><span class="emoji">Open</span> /perseids</a>
+      </div>
+      <div class="card">
+      <h3>📜 Love Letters</h3>
+      <p>All my letters to you, in one cozy place.</p>
+      <a class="btn" href="/letters"><span class="emoji">Open</span> /letters</a>
+    </div>
+
     </main>
 
     <div class="hr"></div>
     <footer class="footer">
-      <p class="small">Static music & images live in <code>/static</code> · Made with 💙 PyWebIO</p>
+      <p class="small">Always love you and be with you <code>/static</code> · Made with 💙 Echo</p>
     </footer>
   </div>
 </body>
 </html>
 """
 
+
 @app.route("/")
 def index():
     return HOME_HTML
 
+
 # Map PyWebIO pages -> Flask routes
-app.add_url_rule("/two-weeks",  "two_weeks_v1",  webio_view(two_weeks_v1.app_main),  methods=['GET','POST','OPTIONS'])
-app.add_url_rule("/two-weeks2", "two_weeks_menu",webio_view(two_weeks_menu.app_main),methods=['GET','POST','OPTIONS'])
-app.add_url_rule("/open-box",   "open_box",      webio_view(open_box.app_main),      methods=['GET','POST','OPTIONS'])
-app.add_url_rule("/three-weeks","three_weeks",   webio_view(three_weeks.app_main),   methods=['GET','POST','OPTIONS'])
-app.add_url_rule("/perseids",   "perseids",      webio_view(perseids_app.app_main),  methods=['GET','POST','OPTIONS'])
+app.add_url_rule("/two-weeks",  "two_weeks_v1",
+                 webio_view(two_weeks_v1.app_main),  methods=['GET', 'POST', 'OPTIONS'])
+app.add_url_rule("/two-weeks2", "two_weeks_menu",
+                 webio_view(two_weeks_menu.app_main), methods=['GET', 'POST', 'OPTIONS'])
+app.add_url_rule("/eighteen-days", "eighteen_days",
+                 webio_view(eighteen_days.app_main), methods=['GET', 'POST', 'OPTIONS'])
+app.add_url_rule("/three-weeks", "three_weeks",
+                 webio_view(three_weeks.app_main),   methods=['GET', 'POST', 'OPTIONS'])
+app.add_url_rule("/perseids",   "perseids",
+                 webio_view(perseids_app.app_main),  methods=['GET', 'POST', 'OPTIONS'])
+app.add_url_rule("/letters", "love_letters",
+                 webio_view(love_letters.app_main), methods=['GET', 'POST', 'OPTIONS'])
+
 
 if __name__ == "__main__":
     # Local dev
