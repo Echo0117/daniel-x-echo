@@ -1,7 +1,5 @@
 fastapi
-uvicorn[standard]
-pywebio==1.*
-gradio
-transformers
-peft
-datasets
+flask==2.3.*
+pywebio==1.8.4
+gunicorn==23.0.0
+

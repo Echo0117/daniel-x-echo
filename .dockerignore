@@ -1,0 +1,16 @@
+.git
+__pycache__/
+*.pyc
+*.ipynb
+*.pt
+*.bin
+*.safetensors
+*.zip
+*.tar*
+node_modules/
+venv/
+.env
+# any model/training/output folders:
+first_love_you/
+checkpoints/
+data/
