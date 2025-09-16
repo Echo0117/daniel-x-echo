@@ -2,7 +2,7 @@ from flask import Flask
 from pywebio.platform.flask import webio_view
 
 # import your PyWebIO pages (each exposes app_main())
-from app.pages import eighteen_days, love_letters, two_weeks_v1, two_weeks_menu, three_weeks, perseids_app
+from app.pages import eighteen_days, first_love_ai, love_letters, poetry, two_weeks_v1, two_weeks_menu, three_weeks, perseids_app
 
 app = Flask(__name__, static_folder="static")
 
@@ -125,6 +125,13 @@ body{
         <a class="btn" href="/three-weeks"><span class="emoji">Open</span> /three-weeks</a>
       </div>
       <div class="card">
+        <h3>💘 First "I love you"</h3>
+        <p>AI analyzer · let’s uncover the romantic theme of your words.</p>
+        <a class="btn" href="/first-love">
+          <span class="emoji">Open</span> /first-love
+        </a>
+      </div>
+      <div class="card">
         <h3>🌠 Perseids Surprise</h3>
         <p>Dinner → ferris wheel → a meteor shower night. Bring a wish.</p>
         <a class="btn" href="/perseids"><span class="emoji">Open</span> /perseids</a>
@@ -134,6 +141,11 @@ body{
       <p>All my letters to you, in one cozy place.</p>
       <a class="btn" href="/letters"><span class="emoji">Open</span> /letters</a>
     </div>
+    <div class="card">
+    <h3>📝 Poetry</h3>
+    <p>Two shelves: Echo’s poems and the beautiful ones we found.</p>
+    <a class="btn" href="/poetry"><span class="emoji">Open</span> /poetry</a>
+  </div>
 
     </main>
 
@@ -165,7 +177,18 @@ app.add_url_rule("/perseids",   "perseids",
                  webio_view(perseids_app.app_main),  methods=['GET', 'POST', 'OPTIONS'])
 app.add_url_rule("/letters", "love_letters",
                  webio_view(love_letters.app_main), methods=['GET', 'POST', 'OPTIONS'])
-
+app.add_url_rule(
+    "/first-love",
+    "first_love",
+    webio_view(first_love_ai.app_main),
+    methods=["GET", "POST", "OPTIONS"]
+)
+app.add_url_rule(
+    "/poetry",
+    "poetry",
+    webio_view(poetry.app_main),
+    methods=["GET","POST","OPTIONS"]
+)
 
 if __name__ == "__main__":
     # Local dev

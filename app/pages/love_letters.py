@@ -311,7 +311,6 @@ from pywebio.input import actions
 
 def app_main():
     inject_theme()
-    back_home()
 
     # persistent content area; do NOT clear the root
     use_scope("content")
