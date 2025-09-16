@@ -3,4 +3,6 @@ flask==2.3.*
 pywebio==1.8.4
 gunicorn==23.0.0
 markdown
-
+transformers>=4.41
+peft>=0.11
+accelerate>=0.33
