@@ -11,30 +11,30 @@ try:
 except Exception:
     pass
 
-from transformers import AutoTokenizer, AutoModelForSequenceClassification, pipeline
-from peft import PeftModel, PeftConfig
+# from transformers import AutoTokenizer, AutoModelForSequenceClassification, pipeline
+# from peft import PeftModel, PeftConfig
 
 BASE_ID   = os.getenv("FIRST_LOVE_BASE", "distilbert-base-uncased")
 ADAPTERID = os.getenv("FIRST_LOVE_ADAPTER", "first_love_you/deduction_classifier")
 
 _classifier = None
-def get_classifier():
-    """Lazy-load once; tiny-instance friendly."""
-    global _classifier
-    if _classifier: return _classifier
-    try:
-        peft_cfg = PeftConfig.from_pretrained(ADAPTERID)
-        base_id = peft_cfg.base_model_name_or_path or BASE_ID
-    except Exception:
-        base_id = BASE_ID
-    base = AutoModelForSequenceClassification.from_pretrained(base_id, num_labels=10)
-    try:
-        model = PeftModel.from_pretrained(base, ADAPTERID)
-    except Exception:
-        model = base
-    tok = AutoTokenizer.from_pretrained(base_id)
-    _classifier = pipeline("text-classification", model=model, tokenizer=tok, return_all_scores=False)
-    return _classifier
+# def get_classifier():
+#     """Lazy-load once; tiny-instance friendly."""
+#     global _classifier
+#     if _classifier: return _classifier
+#     try:
+#         peft_cfg = PeftConfig.from_pretrained(ADAPTERID)
+#         base_id = peft_cfg.base_model_name_or_path or BASE_ID
+#     except Exception:
+#         base_id = BASE_ID
+#     base = AutoModelForSequenceClassification.from_pretrained(base_id, num_labels=10)
+#     try:
+#         model = PeftModel.from_pretrained(base, ADAPTERID)
+#     except Exception:
+#         model = base
+#     tok = AutoTokenizer.from_pretrained(base_id)
+#     _classifier = pipeline("text-classification", model=model, tokenizer=tok, return_all_scores=False)
+#     return _classifier
 
 ROMANTIC = {
     "0":"Destiny","1":"Unspoken Love","2":"Serendipity","3":"Shared Dreams","4":"Forever Promises",
@@ -147,22 +147,22 @@ def app_main():
         # Compute / render result
         if not text:
             put_html("<script>document.getElementById('py-result').innerHTML = `<div class='result-box'>Please write something romantic 🌹</div>`;</script>")
-        else:
-            clf = get_classifier()
-            out = clf(text)[0]
-            label = re.sub(r"^LABEL_","", out["label"])
-            theme = ROMANTIC.get(label, "Mystery")
-            comp  = random.choice(COMPS)
-            poem  = random.choice(POEMS)
-            res_html = f"""
-            <div class='result-box'>
-              💘 <b>Romantic Theme:</b> <u>{theme}</u><br>
-              💌 <b>Confidence:</b> {out['score']:.2%}<br><br>
-              💖 {comp}<br><br>
-              <i>📖 {poem}</i>
-            </div>
-            """
-            put_html(f"<script>document.getElementById('py-result').innerHTML = {res_html!r};</script>")
+        # else:
+            # clf = get_classifier()
+            # out = clf(text)[0]
+            # label = re.sub(r"^LABEL_","", out["label"])
+            # theme = ROMANTIC.get(label, "Mystery")
+            # comp  = random.choice(COMPS)
+            # poem  = random.choice(POEMS)
+            # res_html = f"""
+            # <div class='result-box'>
+            #   💘 <b>Romantic Theme:</b> <u>{theme}</u><br>
+            #   💌 <b>Confidence:</b> {out['score']:.2%}<br><br>
+            #   💖 {comp}<br><br>
+            #   <i>📖 {poem}</i>
+            # </div>
+            # """
+            # put_html(f"<script>document.getElementById('py-result').innerHTML = {res_html!r};</script>")
 
         # Show uploaded image below result (like Gradio)
         if img and img.get("content"):
