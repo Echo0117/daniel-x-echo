@@ -105,7 +105,7 @@ def app_main():
         def right_col():
             items = []
             # GIF from static or skip
-            gif_path = os.path.join("static","first_love","kiss.gif")
+            gif_path = os.path.join("static","kiss.gif")
             if os.path.exists(gif_path):
                 items.append( put_html("<div class='gif'>") )
                 items.append( put_image(open(gif_path,"rb").read()) )
